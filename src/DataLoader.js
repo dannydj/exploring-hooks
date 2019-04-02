@@ -1,18 +1,21 @@
-import { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
-class DataLoader extends Component {
-	state = { data: [] }
+const DataLoader = () => {
+	const [data, setData] = useState([]);
 
-	componentDidMount() {
-		return fetch('https://jsonplaceholder.typicode.com/posts')
+	useEffect(() => {
+		fetch('https://jsonplaceholder.typicode.com/posts')
 			.then(response => response.json())
-			.then(data => this.setState({ data }));
-	}
+			.then(data => setData(data))
+	});
 
-	render() {
-		// Con la prop 'render' se puede pasar fácilmente los datos al componente App como función
-		return this.props.render(this.state.data);
-	}
+	return (
+		<div>
+			<ul>
+				{data.map(el => <li key={el.id}>{el.title}</li>)}
+			</ul>
+		</div>
+	);
 }
 
 export default DataLoader;
