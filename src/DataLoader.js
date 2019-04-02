@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
+import useFetch from './useFetch';
 
 const DataLoader = (props) => {
-	const [data, setData] = useState([]);
+	const data = useFetch('https://jsonplaceholder.typicode.com/posts');
 
-	useEffect(() => {
-		fetch('https://jsonplaceholder.typicode.com/posts')
-			.then(response => response.json())
-			.then(data => setData(data))
-	}, []); // << super important array
-
-	// React Hooks were born for a reason: sharing logic between components
-	return props.render(data);
+	return (
+		<div>
+			<ul>
+				{data.map(el => <li key={el.id}>{el.title}</li>)}
+			</ul>
+		</div>
+	);
 }
 
 export default DataLoader;
