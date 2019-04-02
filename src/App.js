@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import Button from './Button';
+import DataLoader from './DataLoader';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-				<Button />
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="App">
+				<DataLoader render={data => (
+					<div>
+						<ul>
+							{data.map(el => <li key={el.id}>{el.title}</li>)}
+						</ul>
+					</div>
+				)} />
+			</div>
+		);
+	}
 }
 
 export default App;
