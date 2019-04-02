@@ -1,18 +1,13 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-class Button extends Component {
-	state = { buttonText: 'Click me, please' }
+const Button = () => {
+	const [buttonText, setButtonText] = useState('Click me, please');
 
-	handleClick = () => {
-		this.setState({ buttonText: 'Thanks, been clicked!' });
-	}
+	const handleClick = () => (setButtonText('Thanks, been clicked!'));
 
-	render() {
-		const { buttonText } = this.state;
-		return (
-			<button onClick={this.handleClick}>{buttonText}</button>
-		);
-	}
+	return (
+		<button onClick={handleClick}>{buttonText}</button>
+	);
 }
 
 export default Button;
